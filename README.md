@@ -1,2 +1,3 @@
 # blog-samples
-The aim of this repository is to host all the sample apps I write as sample apps for my blog
+The aim of this repository is to host sample apps I write for my [blog](http://blog.rolandl.fr).
+
