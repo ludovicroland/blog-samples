@@ -1,0 +1,1 @@
+Sample app for the article "[Mettre en place la connexion Google+ dans une application](http://blog.rolandl.fr/2015-02-15-mettre-en-place-la-connexion-google-plus-dans-une-application-android.html)" android available on my blog.
