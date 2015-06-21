@@ -1,0 +1,1 @@
+Sample app for the article "[De la pub dans vos applications Android grâce à Google AdMob](http://blog.rolandl.fr/2015-06-21-de-la-pub-dans-vos-applications-android-grace-a-google-admob.html)" android available on my blog.
