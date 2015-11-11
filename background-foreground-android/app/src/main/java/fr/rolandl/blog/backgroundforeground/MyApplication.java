@@ -36,9 +36,9 @@ public final class MyApplication
     @Override
     public boolean handleMessage(Message msg)
     {
-      if (previousVisibility != msg.arg1)
+      if (previousVisibility != msg.what)
       {
-        previousVisibility = msg.arg1;
+        previousVisibility = msg.what;
         if (msg.what == MyApplication.APP_VISIBLE)
         {
           Toast.makeText(context, "App is in foreground", Toast.LENGTH_SHORT).show();
@@ -104,12 +104,8 @@ public final class MyApplication
     {
       isAppInForeground = true;
 
-      final Message msg = new Message();
-      msg.what = MyApplication.APP_VISIBLE;
-      msg.arg1 = 1;
-
       visibilityHandler.removeMessages(MyApplication.APP_HIDDEN);
-      visibilityHandler.sendMessageDelayed(msg, MyApplication.VISIBILITY_DELAY_IN_MS);
+      visibilityHandler.sendEmptyMessageDelayed(MyApplication.APP_VISIBLE, MyApplication.VISIBILITY_DELAY_IN_MS);
     }
   }
 
@@ -126,12 +122,8 @@ public final class MyApplication
       {
         isAppInForeground = false;
 
-        final Message msg = new Message();
-        msg.what = MyApplication.APP_HIDDEN;
-        msg.arg1 = 0;
-
         visibilityHandler.removeMessages(MyApplication.APP_VISIBLE);
-        visibilityHandler.sendMessageDelayed(msg, MyApplication.VISIBILITY_DELAY_IN_MS);
+        visibilityHandler.sendEmptyMessageDelayed(MyApplication.APP_HIDDEN, MyApplication.VISIBILITY_DELAY_IN_MS);
       }
     }
   }
