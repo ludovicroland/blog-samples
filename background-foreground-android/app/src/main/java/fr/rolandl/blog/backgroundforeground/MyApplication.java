@@ -30,7 +30,7 @@ public final class MyApplication
     {
       this.context = context;
       //Change this variable value if you want to be notified of the first launch
-      previousVisibility = 0;
+      previousVisibility = MyApplication.APP_VISIBLE;
     }
 
     @Override
@@ -39,6 +39,7 @@ public final class MyApplication
       if (previousVisibility != msg.what)
       {
         previousVisibility = msg.what;
+        
         if (msg.what == MyApplication.APP_VISIBLE)
         {
           Toast.makeText(context, "App is in foreground", Toast.LENGTH_SHORT).show();
@@ -62,17 +63,11 @@ public final class MyApplication
 
   private Handler visibilityHandler;
 
-  private int visibilityCounter;
-
-  private boolean isAppInForeground;
-
   @Override
   public void onCreate()
   {
     super.onCreate();
     registerActivityLifecycleCallbacks(this);
-    visibilityCounter = 0;
-    isAppInForeground = false;
     visibilityHandler = new Handler(new VisibilityCallback(getApplicationContext()));
   }
 
@@ -98,34 +93,15 @@ public final class MyApplication
   @Override
   public void onActivityResumed(Activity activity)
   {
-    visibilityCounter++;
-
-    if (isAppInForeground == false)
-    {
-      isAppInForeground = true;
-
-      visibilityHandler.removeMessages(MyApplication.APP_HIDDEN);
-      visibilityHandler.sendEmptyMessageDelayed(MyApplication.APP_VISIBLE, MyApplication.VISIBILITY_DELAY_IN_MS);
-    }
+    visibilityHandler.removeMessages(MyApplication.APP_HIDDEN);
+    visibilityHandler.sendEmptyMessageDelayed(MyApplication.APP_VISIBLE, MyApplication.VISIBILITY_DELAY_IN_MS);
   }
 
   @Override
   public void onActivityPaused(Activity activity)
   {
-    visibilityCounter--;
-
-    if (visibilityCounter <= 0)
-    {
-      visibilityCounter = 0;
-
-      if (isAppInForeground == true)
-      {
-        isAppInForeground = false;
-
-        visibilityHandler.removeMessages(MyApplication.APP_VISIBLE);
-        visibilityHandler.sendEmptyMessageDelayed(MyApplication.APP_HIDDEN, MyApplication.VISIBILITY_DELAY_IN_MS);
-      }
-    }
+    visibilityHandler.removeMessages(MyApplication.APP_VISIBLE);
+    visibilityHandler.sendEmptyMessageDelayed(MyApplication.APP_HIDDEN, MyApplication.VISIBILITY_DELAY_IN_MS);
   }
 
   @Override
