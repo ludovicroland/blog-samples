@@ -1,0 +1,1 @@
+Sample app for the article "[Android : détecter si une application passe au premier plan ou en arrière plan](http://blog.rolandl.fr/2015-11-11-android-detecter-si-une-application-passe-au-premier-plan-ou-en-arriere-plan.html)" android available on my blog.
